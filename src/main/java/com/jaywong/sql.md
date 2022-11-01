@@ -41,7 +41,6 @@ hive优化
     第二步：过滤数据 WHERE GROUP BY (开始使用SELECT 中的别名，后面的语句中都可以使用) 内置函数(avg，sum...) HAVING
     第三步：查询数据 SELECT
     第四步：显示数据 DISTINCT ORDER BY LIMIT
-
     1、使用分区, 分桶
     2、使用sort by 替代order by: order by会进行全局排序, 这会导致所有map端数据都进入一个reduce中，在数据量大时可能会长时间计算不完。
         如果使用sort by，那么就会视情况启动多个reducer进行排序，并且保证每个reducer内局部有序。为了控制map
@@ -68,6 +67,12 @@ hive优化
     8、设置自动选择MapJoin:
         a. set hive.auto.convert.join = true; 默认为 true;
         b. set hive.mapjoin.smalltable.filesize=25000000; 25M以下为小表
+
+hive在join过程中会出现很多小文件, 如何优化:
+    
+
+MR的shuffle和Spark的shuffle区别:
+
 
 
 窗口函数:
